@@ -3,8 +3,8 @@ const app = express();
 app.use(express.json());
 const bd = require("./alunos");
 
-app.get("/", (requisicao, resposta) => {
-  resposta.send("<h1>Hello, World!</h1> <p>O que faremos hoje? </p>");
+app.get("/", (req, res) => {
+  res.send("<h1>Hello, World!</h1> <p>O que faremos hoje? </p>");
 });
 
 //Parte 1
