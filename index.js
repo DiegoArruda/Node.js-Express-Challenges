@@ -17,6 +17,16 @@ app.get("/alunos", (req, res) => {
   } else res.json({ message: bd.alunos });
 });
 
+//Parte 2
+app.post("/alunos/novo", (req, res) => {
+  const { nome, matricula, media } = req.body;
+  if (nome !== undefined && matricula !== undefined && media !== undefined) {
+    res.json({ nome, matricula, media });
+  } else {
+    res.status(400).json({ message: "Dados inválidos para matricular" });
+  }
+});
+
 app.listen(3000, () => {
   console.log(`http://localhost:3000`);
 });
