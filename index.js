@@ -27,6 +27,16 @@ app.post("/alunos/novo", (req, res) => {
   }
 });
 
+//Parte3
+app.post("/alunos/deletar/:index", (req, res) => {
+  const index = Number(req.params.index);
+  const alunoEncontrado = bd.alunos[index];
+  if (alunoEncontrado) {
+    delete alunoEncontrado;
+    res.json({ message: "Aluno deletado com sucesso" });
+  } else res.status(404).json({ message: "Aluno não encontrado" });
+});
+
 app.listen(3000, () => {
   console.log(`http://localhost:3000`);
 });
