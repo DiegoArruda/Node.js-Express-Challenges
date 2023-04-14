@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const bd = require("./alunos");
+const fs = require("fs");
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello, World!</h1> <p>O que faremos hoje? </p>");
@@ -21,7 +22,10 @@ app.get("/alunos", (req, res) => {
 app.post("/alunos/novo", (req, res) => {
   const { nome, matricula, media } = req.body;
   if (nome !== undefined && matricula !== undefined && media !== undefined) {
-    res.json({ message: `Aluno excluido com sucesso`, alunos: bd.alunos });
+    bd.alunos.push({ nome: nome, matricula: matricula, media: media });
+    var jsonData = JSON.stringify(bd.alunos);
+    fs.writeFileSync("db.json", jsonData);
+    res.json({ message: `Adicionado com sucesso`, alunos: bd.alunos });
   } else {
     res.status(400).json({ message: "Dados inválidos para matricular" });
   }
@@ -35,6 +39,8 @@ app.post("/alunos/deletar/:index", (req, res) => {
     for (i = 0; i < bd.alunos.length; i++) {
       if ((i = alunoEncontrado)) {
         bd.alunos.splice(i, 1);
+        var jsonData = JSON.stringify(bd.alunos);
+        fs.writeFileSync("db.json", jsonData);
         res.json({ message: `Aluno excluido com sucesso`, alunos: bd.alunos });
       }
     }
@@ -45,12 +51,16 @@ app.post("/alunos/deletar/:index", (req, res) => {
 //Parte 4
 app.post("/alunos/atualizar/:index", (req, res) => {
   const index = Number(req.params.index);
+  // pq fazer esta equivalencia?
   const att = bd.alunos[index];
   const { nome, media } = req.body;
+  // pq checar o index primeiro?
   if (att !== undefined) {
     if (nome !== undefined && media !== undefined) {
-      bd.alunos[att].nome = nome;
-      bd.alunos[att].media = media;
+      att.nome = nome;
+      att.media = media;
+      var jsonData = JSON.stringify(bd.alunos);
+      fs.writeFileSync("db.json", jsonData);
       res.json({
         message: `Alterações feitas com sucesso `,
         alunos: bd.alunos,
