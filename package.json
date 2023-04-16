@@ -1,0 +1,26 @@
+{
+  "name": "node.js-express-challenges",
+  "version": "1.0.0",
+  "description": "Crie um módulo alunos.js que exporta um array de alunos, uma função que filtra pelo nome e uma que filtra pela média (maior ou igual).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiegoArruda/Node.js-Express-Challenges.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiegoArruda/Node.js-Express-Challenges/issues"
+  },
+  "homepage": "https://github.com/DiegoArruda/Node.js-Express-Challenges#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
+  }
+}
