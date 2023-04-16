@@ -16,6 +16,7 @@ Desafio 1: Refatore a aplicação e mova para alunos.js, os métodos de deletar,
 
 Desafio 2: Substituir as rotas POST de atualizar e deletar com os métodos PUT e DELETE respectivamente, reformulando as URLs para todas utilizarem o mesmo caminho /alunos, mudando apenas o método utilizado; CLEAR
 
-Desafio 3: Entregue a documentação desta API usando os recursos do Postman;
+Desafio 3: Entregue a documentação desta API usando os recursos do Postman; Clear
+Link com a API publicada: https://documenter.getpostman.com/view/26870895/2s93Xx1jMH 
 
 Desafio 4: Pesquise e aplique o logger morgan na aplicação;
