@@ -1,11 +1,15 @@
 const express = require("express");
-const app = express();
-app.use(express.json());
 const bd = require("./alunos");
+const logger = require("morgan");
+const morgan = require("morgan");
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello, World!</h1> <p>O que faremos hoje? </p>");
-});
+const app = express();
+
+morgan.token("body", (req) => JSON.stringify(req.body));
+
+app.use(express.json());
+app.use(morgan(":url :method :body"));
+app.use(logger("dev"));
 
 //Parte 1
 app.get("/alunos", (req, res) => {
@@ -29,7 +33,6 @@ app.post("/alunos/novo", (req, res) => {
 });
 
 //Deletar
-// Utilizar DELETE
 app.post("/alunos/deletar/:index", (req, res) => {
   const index = Number(req.params.index);
   try {
@@ -41,7 +44,6 @@ app.post("/alunos/deletar/:index", (req, res) => {
 });
 
 //Atualizar
-// utilizar PUT
 app.post("/alunos/atualizar/:index", (req, res) => {
   const index = Number(req.params.index);
   try {
