@@ -33,7 +33,7 @@ app.post("/alunos/novo", (req, res) => {
 });
 
 //Deletar
-app.post("/alunos/deletar/:index", (req, res) => {
+app.delete("/alunos/deletar/:index", (req, res) => {
   const index = Number(req.params.index);
   try {
     const result = bd.deletarAluno(index, bd.alunos);
@@ -44,7 +44,7 @@ app.post("/alunos/deletar/:index", (req, res) => {
 });
 
 //Atualizar
-app.post("/alunos/atualizar/:index", (req, res) => {
+app.put("/alunos/atualizar/:index", (req, res) => {
   const index = Number(req.params.index);
   try {
     const result = bd.atualizarAluno(index, req.body, bd.alunos);
