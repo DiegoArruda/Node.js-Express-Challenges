@@ -19,4 +19,4 @@ Desafio 2: Substituir as rotas POST de atualizar e deletar com os métodos PUT e
 Desafio 3: Entregue a documentação desta API usando os recursos do Postman; Clear
 Link com a API publicada: https://documenter.getpostman.com/view/26870895/2s93Xx1jMH 
 
-Desafio 4: Pesquise e aplique o logger morgan na aplicação;
+Desafio 4: Pesquise e aplique o logger morgan na aplicação; Clear
