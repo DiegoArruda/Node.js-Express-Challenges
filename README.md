@@ -12,7 +12,7 @@ Crie uma rota POST para /alunos/atualizar/:index, que no corpo da requisição r
 
 Desafio 0: Escreva um arquivo JSON chamado db.json toda vez que ocorrer uma alteração nos dados do array de alunos; Clear
 
-Desafio 1: Refatore a aplicação e mova para alunos.js, os métodos de deletar, adicionar e atualizar um aluno; 
+Desafio 1: Refatore a aplicação e mova para alunos.js, os métodos de deletar, adicionar e atualizar um aluno; CLEAR
 
 Desafio 2: Substituir as rotas POST de atualizar e deletar com os métodos PUT e DELETE respectivamente, reformulando as URLs para todas utilizarem o mesmo caminho /alunos, mudando apenas o método utilizado; CLEAR
 
