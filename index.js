@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const bd = require("./alunos");
-const fs = require("fs");
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello, World!</h1> <p>O que faremos hoje? </p>");
@@ -18,55 +17,39 @@ app.get("/alunos", (req, res) => {
   } else res.json({ message: bd.alunos });
 });
 
-//Parte 2
+//Adicionar
 app.post("/alunos/novo", (req, res) => {
   const { nome, matricula, media } = req.body;
-  if (nome !== undefined && matricula !== undefined && media !== undefined) {
-    bd.alunos.push({ nome: nome, matricula: matricula, media: media });
-    var jsonData = JSON.stringify(bd.alunos);
-    fs.writeFileSync("db.json", jsonData);
-    res.json({ message: `Adicionado com sucesso`, alunos: bd.alunos });
-  } else {
-    res.status(400).json({ message: "Dados inválidos para matricular" });
+  try {
+    const result = bd.adicionarAluno(nome, matricula, media, bd.alunos);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 
-//Parte3
+//Deletar
+// Utilizar DELETE
 app.post("/alunos/deletar/:index", (req, res) => {
   const index = Number(req.params.index);
-  const alunoEncontrado = bd.alunos[index];
-  if (alunoEncontrado !== undefined) {
-    for (i = 0; i < bd.alunos.length; i++) {
-      if ((i = alunoEncontrado)) {
-        bd.alunos.splice(i, 1);
-        var jsonData = JSON.stringify(bd.alunos);
-        fs.writeFileSync("db.json", jsonData);
-        res.json({ message: `Aluno excluido com sucesso`, alunos: bd.alunos });
-      }
-    }
-  } else res.status(404).json({ message: "Aluno não encontrado" });
+  try {
+    const result = bd.deletarAluno(index, bd.alunos);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
-/* Na parte 4, acredito que a ordem das checagens estão incorretas, para facilitar você pode primeiro checar se existe o aluno usando a mesma checagem das linhas 33 e 34. Daí no else faria a resposta 404, e dentro do if checaria se nome e média são válidos para aí sim fazer as mudanças em 49 e 50. Caso nome e média sejam inválidos você pode tratar no else um erro 400 indicando que os dados fornecidos são inválidos. */
-//Parte 4
+//Atualizar
+// utilizar PUT
 app.post("/alunos/atualizar/:index", (req, res) => {
   const index = Number(req.params.index);
-  // pq fazer esta equivalencia?
-  const att = bd.alunos[index];
-  const { nome, media } = req.body;
-  // pq checar o index primeiro?
-  if (att !== undefined) {
-    if (nome !== undefined && media !== undefined) {
-      att.nome = nome;
-      att.media = media;
-      var jsonData = JSON.stringify(bd.alunos);
-      fs.writeFileSync("db.json", jsonData);
-      res.json({
-        message: `Alterações feitas com sucesso `,
-        alunos: bd.alunos,
-      });
-    } else res.status(404).json({ message: "Dados Invalidos" });
-  } else res.status(404).json({ message: "Aluno não encontrado" });
+  try {
+    const result = bd.atualizarAluno(index, req.body, bd.alunos);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 app.listen(3000, () => {
